@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Surprise - Unlock</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #c9c490, #540f2b);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      width: 300px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #034670;
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      border: 2px solid #4a86d5;
+      border-radius: 10px;
+      outline: none;
+      font-size: 16px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #1483eb;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #09a1cb;
+      transform: scale(1.1);
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔐 Unlock Your Birthday Surprise</h2>
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="checkPassword()">Unlock</button>
+    <p class="error" id="errorMsg">❌ Wrong password! Try again.</p>
+  </div>
+
+  <script>
+    function checkPassword() {
+      let pass = document.getElementById("password").value;
+      let errorMsg = document.getElementById("errorMsg");
+
+      if(pass === "PriyAshi" || pass === "PriyAshi") {
+        window.location.href = "page2.html"; // ✅ Next page
+      } else {
+        errorMsg.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
