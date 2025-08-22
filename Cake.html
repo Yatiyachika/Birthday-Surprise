@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+      font-family: sans-serif;
+      text-align: center;
+    }
+
+    /* Bulb */
+    .bulb {
+      width: 60px;
+      height: 80px;
+      background: #555;
+      border-radius: 50% 50% 45% 45%;
+      margin: 20px auto;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+    .bulb::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: #333;
+      border-radius: 4px;
+    }
+    .glow {
+      box-shadow: 0 0 40px 15px yellow;
+      background: yellow;
+    }
+
+    /* Balloons */
+    .balloon {
+      width: 60px;
+      height: 80px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+      top: 100%;
+      animation: float 6s infinite ease-in-out;
+      display: none;
+    }
+    .balloon::after {
+      content: "";
+      width: 2px;
+      height: 50px;
+      background: black;
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    @keyframes float {
+      0% { top: 100%; }
+      100% { top: 10%; }
+    }
+
+    /* Cake */
+    .main {
+      display: none;
+    }
+    .flame1,.flame2,.flame3 {
+      width: 20px;
+      height: 30px;
+      margin: 0 30px;
+      background: yellow;
+      border-radius: 50%;
+      position: relative;
+      animation: flicker 0.2s infinite alternate;
+    }
+    @keyframes flicker {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(0.9); opacity: 1; }
+    }
+    .candle1,.candle2,.candle3 {
+      width: 20px;
+      height: 100px;
+      background: #ddd;
+      border-radius: 5px;
+      margin: 0 30px;
+    }
+    .rectangle1 {
+      margin: 10px auto;
+      width: 350px;
+      height: 100px;
+      background: rgb(232, 157, 17);
+      border-radius: 8px;
+      position: relative;
+      transition: clip-path 1s ease-in-out;
+    }
+    .rectangle2 {
+      margin: 0 auto;
+      width: 450px;
+      height: 100px;
+      background: rgb(229, 27, 61);
+      border-radius: 8px;
+    }
+    .rectangle3 {
+      margin: 0 auto 20px;
+      width: 550px;
+      height: 100px;
+      background: rgb(70, 2, 2);
+      border-radius: 8px;
+    }
+    .Wish {
+      font-family: fantasy;
+      color: rgb(187, 189, 27);
+      font-size: 50px;
+      text-shadow: 0px 5px 8px rgb(212, 231, 41);
+    }
+
+    /* Cake cut effect (square cut) */
+    .cut {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 30% 30%, 70% 30%, 70% 70%, 30% 70%);
+    }
+
+    /* Buttons */
+    .btns {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Bulb -->
+  <div class="bulb" id="bulb"></div>
+
+  <!-- Balloons -->
+  <div class="balloon" style="left:20%; background: red;"></div>
+  <div class="balloon" style="left:40%; background: blue; animation-delay:1s;"></div>
+  <div class="balloon" style="left:60%; background: green; animation-delay:2s;"></div>
+  <div class="balloon" style="left:80%; background: orange; animation-delay:3s;"></div>
+
+  <!-- Cake -->
+  <div class="main" id="mainCake">
+    <div style="display:flex;justify-content:center;">
+      <div class="flame1"></div>
+      <div class="flame2"></div>
+      <div class="flame3"></div>
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <div class="candle1"></div>
+      <div class="candle2"></div>
+      <div class="candle3"></div>
+    </div>
+    <div class="rectangle1" id="cakeTop"></div>
+    <div class="rectangle2"></div>
+    <div class="rectangle3"></div>
+    <div class="Wish">🎉 Happy Birthday 🎉</div>
+
+    <div class="btns">
+      <button onclick="alert('Make a Wish! 🎂')">Make a Wish</button>
+      <button onclick="cutCake()">Cake Cut</button>
+    </div>
+  </div>
+
+  <script>
+    const bulb = document.getElementById('bulb');
+    const cake = document.getElementById('mainCake');
+    const balloons = document.querySelectorAll('.balloon');
+    const cakeTop = document.getElementById('cakeTop');
+
+    bulb.addEventListener('click', () => {
+      bulb.classList.add('glow');
+      cake.style.display = 'block';
+      balloons.forEach(b => b.style.display = 'block');
+      // bulb gayab ho jaye light on hone ke baad
+      setTimeout(() => {
+        bulb.style.display = 'none';
+      }, 1000);
+    });
+
+    function cutCake() {
+      cakeTop.classList.add('cut');
+    }
+  </script>
+</body>
+</html>

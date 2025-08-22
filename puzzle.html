@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Birthday Letter Surprise</title>
+  <style>
+    body{
+      margin:0; padding:0;
+      background: linear-gradient(135deg,#ffdde1,#ee9ca7);
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      overflow-x:hidden;
+    }
+    h1{
+      text-align:center; margin:28px 12px;
+      color:#fff; font-size:clamp(20px,5vw,36px);
+      text-shadow:0 4px 14px rgba(0,0,0,.25);
+    }
+
+    /* Balloons */
+    .balloon{
+      position:fixed; bottom:-140px; width:56px; height:74px;
+      border-radius:50% 50% 48% 48%;
+      background: radial-gradient(circle at 30% 30%, #ffffffaa, transparent 45%), var(--c,#ff6b81);
+      animation: floatUp var(--t,12s) linear infinite;
+      filter: drop-shadow(0 10px 14px rgba(0,0,0,.15));
+      z-index:0;
+    }
+    .balloon::after{
+      content:""; position:absolute; top:72px; left:50%;
+      width:2px; height:54px; background:#444; transform:translateX(-50%);
+    }
+    @keyframes floatUp{
+      0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:.95}
+      50%{transform:translateY(-55vh) translateX(24px) rotate(6deg)}
+      100%{transform:translateY(-110vh) translateX(-24px) rotate(-6deg); opacity:0}
+    }
+
+    /* Layout */
+    .wrap{
+      display:flex; justify-content:center; flex-wrap:wrap; gap:22px;
+      padding:20px 16px 80px; position:relative; z-index:1;
+    }
+
+    /* Envelope card */
+    .envelope{
+      position:relative; width:170px; height:120px;
+      border:2px solid rgb(222, 189, 105); border-radius:8px;
+      background:#d0e1f0; cursor:pointer; perspective:1000px;
+      transition:transform .25s ease;
+      overflow:visible;        /* IMPORTANT: allow letter to slide out */
+    }
+    .envelope:hover{ transform:translateY(-2px) }
+
+    /* Flap */
+    .flap{
+      position:absolute; inset:0 0 50% 0;  /* top half triangle */
+      background:rgb(229, 219, 131); clip-path:polygon(0 0, 50% 100%, 100% 0);
+      transform-origin: top center;
+      transform: rotateX(0deg);
+      transition: transform .65s ease;
+      z-index:2;                           /* sits above by default */
+      backface-visibility:hidden;          /* hide back when flipped */
+    }
+
+    /* Inner letter (the message) */
+    .letter{
+      position:absolute; left:50%; top:54%;
+      transform:translate(-50%,0);         /* start inside envelope */
+      width:145px; min-height:84px;
+      background:#fffdf3; border:1px solid #e7d9a8; border-radius:10px;
+      padding:10px; text-align:center; line-height:1.35;
+      font-weight:700; color:#a01741;
+      box-shadow:0 10px 22px rgba(0,0,0,.18), inset 0 0 0 3px #fff3;
+      opacity:0; transition: transform .65s ease, opacity .65s ease;
+      z-index:1;
+    }
+
+    /* Open state */
+    .envelope.open .flap{
+      transform: rotateX(-175deg);
+      z-index:0;                 /* push flap behind when open */
+      pointer-events:none;
+    }
+    .envelope.open .letter{
+      transform: translate(-50%, -105%);  /* slide upward out */
+      opacity:1;
+      z-index:3;               /* ensure letter is over everything */
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Choose Your Birthday Gift, My King 👑</h1>
+
+  <!-- Balloons streams -->
+  <div class="balloon" style="left:8%;  --c:#6a5acd; --t:14s; animation-delay:0s"></div>
+  <div class="balloon" style="left:18%; --c:#20b2aa; --t:16s; animation-delay:2s"></div>
+  <div class="balloon" style="left:28%; --c:#ff7f50; --t:13s; animation-delay:4s"></div>
+  <div class="balloon" style="left:72%; --c:#f7b733; --t:15s; animation-delay:1s"></div>
+  <div class="balloon" style="left:82%; --c:#4cc9f0; --t:17s; animation-delay:3s"></div>
+  <div class="balloon" style="left:92%; --c:#ff6b81; --t:12s; animation-delay:5s"></div>
+
+  <div class="wrap" id="board">
+    <!-- Make as many as you want; only one will stay open at a time -->
+    <div class="envelope"><div class="flap"></div><div class="letter">👟 Buy me new Shoes</div></div>
+    <div class="envelope"><div class="flap"></div><div class="letter">🍔 A Treat</div></div>
+    <div class="envelope"><div class="flap"></div><div class="letter">👕 Cute T-shirt for me</div></div>
+    </div>
+    <div class="wrap" id="board">
+    <div class="envelope"><div class="flap"></div><div class="letter">Whatever You Want</div></div>
+    <div class="envelope"><div class="flap"></div><div class="letter">🍫 A big chocolate</div></div>
+    <div class="envelope"><div class="flap"></div><div class="letter">🌹 Buy me a Jeans</div></div>
+  </div>
+
+  <script>
+    // Only one envelope open at a time
+    const envelopes = document.querySelectorAll('.envelope');
+    envelopes.forEach(env=>{
+      env.addEventListener('click', ()=>{
+        envelopes.forEach(e=> e.classList.remove('open'));
+        env.classList.add('open');
+      });
+    });
+  </script>
+  <script>
+  // 10 second baad puzzle page open ho jayega
+  setTimeout(() => {
+    window.location.href = "Cake.html";
+  }, 10000);
+</script>
+</body>
+</html>
